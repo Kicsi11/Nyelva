@@ -1,4 +1,4 @@
-// --- PAGE ROUTING SYSTEM ---
+// --- PAGE ROUTING SYSTEM & VIEW TEMPLATES ---
 const pages = {
     home: `
         <section class="page-content">
@@ -11,7 +11,7 @@ const pages = {
             <h1>Available Games</h1>
             <p>Select a game to play:</p>
             <ul>
-                <li><a href="#" onclick="loadPage('map')">Guess the Country Outline</a></li>
+                <li><a href="#map">Guess the Country Outline</a></li>
                 <li>Language Vocabulary Matcher (Coming Soon)</li>
             </ul>
         </section>
@@ -41,16 +41,25 @@ const pages = {
     `
 };
 
-function loadPage(pageKey) {
-    const contentArea = document.getElementById('content-area');
+// --- JAVASCRIPT HASH ROUTER ENGINE ---
+function handleRouting() {
+    // Get current hash from URL (e.g., "#map"), strip the "#" symbol
+    let pageKey = window.location.hash.substring(1);
     
+    // Default fallback to 'home' if landing directly on the root address
+    if (!pageKey) {
+        pageKey = 'home';
+    }
+    
+    // Render the specified template into the main layout container
+    const contentArea = document.getElementById('content-area');
     if (pages[pageKey]) {
         contentArea.innerHTML = pages[pageKey];
     } else {
         contentArea.innerHTML = `<section class="page-content"><h1>404</h1><p>Page not found.</p></section>`;
     }
 
-    // Update active class in navbar
+    // Manage active status tracking visual state across header links
     document.querySelectorAll('.nav-link').forEach(link => {
         if (link.getAttribute('data-page') === pageKey) {
             link.classList.add('active');
@@ -59,40 +68,33 @@ function loadPage(pageKey) {
         }
     });
 
-    // Game trigger
+    // Special initialization routine triggered specifically for the map page
     if (pageKey === 'map') {
         loadGameLibraries();
     }
 }
 
-// Event listeners for navbar clicks
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const page = link.getAttribute('data-page');
-            loadPage(page);
-        });
-    });
-});
+// Router Event Listeners
+document.addEventListener('DOMContentLoaded', handleRouting);
+window.addEventListener('hashchange', handleRouting);
 
 
-// --- SHAPE GAME ENGINE ---
+// --- MAP SHAPE GAME ENGINE ---
 let score = 0;
 let streak = 0;
 let currentCountryIndex = 0;
 let worldCountriesData = [];
 
-// Dynamically load D3.js and TopoJSON libraries from CDNs
+// Dynamically load D3.js and TopoJSON map rendering dependencies from public CDNs
 function loadGameLibraries() {
     if (window.d3 && window.topojson) {
         initGame();
     } else {
-        // Load D3
+        // Sequentially load D3 library first
         const d3Script = document.createElement('script');
         d3Script.src = 'https://d3js.org/d3.v7.min.js';
         d3Script.onload = () => {
-            // Load TopoJSON after D3 loads
+            // Load TopoJSON decoder extension immediately following D3 initialization
             const topoScript = document.createElement('script');
             topoScript.src = 'https://unpkg.com/topojson-client@3';
             topoScript.onload = initGame;
@@ -110,25 +112,25 @@ function initGame() {
 
     const canvasContainer = document.getElementById('outline-canvas-container');
     if (canvasContainer) {
-        canvasContainer.innerHTML = "<h3>Loading 195 Country Outlines...</h3>";
+        canvasContainer.innerHTML = "<h3>Loading Global Boundary Assets...</h3>";
     }
 
-    // Fetch world geography map data (1:110m resolution for fast web performance)
+    // Parallel download of open-source vector map coordinates and matching text labels
     Promise.all([
         d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json"),
-        d3.tsv("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.tsv") // Contains the country names mapped to IDs
+        d3.tsv("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.tsv")
     ]).then(([topoData, tsvData]) => {
         
-        // Match geographic IDs with actual English names
+        // Build relational map linking numeric coordinate IDs with actual country names
         const namesMap = {};
         tsvData.forEach(d => {
             namesMap[d.id] = d.name;
         });
 
-        // Convert raw TopoJSON data into GeoJSON features D3 can draw
+        // Unpack raw TopoJSON vectors into workable GeoJSON shape features
         const geojsonFeatures = topojson.feature(topoData, topoData.objects.countries).features;
 
-        // Map and filter down to legitimate countries with valid names
+        // Process datasets, exclude blank regions and uninhabited territories like Antarctica
         worldCountriesData = geojsonFeatures
             .map(feature => {
                 return {
@@ -138,13 +140,13 @@ function initGame() {
             })
             .filter(country => country.name !== "Unknown" && country.name !== "Antarctica");
 
-        // Shuffle the deck so game order is randomized every play session
+        // Randomize array order to mix up game presentation sequence 
         worldCountriesData.sort(() => Math.random() - 0.5);
 
-        // Re-inject the SVG canvas area lost during the "Loading..." message
+        // Restore clean SVG viewport node inside rendering space
         canvasContainer.innerHTML = '<svg id="outline-svg" width="400" height="400"></svg>';
 
-        // Set up input key handler
+        // Establish keystroke mapping hook to track internal input submission tracking
         const input = document.getElementById('guess-input');
         if (input) {
             input.addEventListener('keypress', (e) => {
@@ -154,32 +156,32 @@ function initGame() {
 
         drawCurrentOutline();
     }).catch(err => {
-        console.error("Error loading map assets:", err);
-        if(canvasContainer) canvasContainer.innerHTML = "<h3>Failed to load game data. Check connection.</h3>";
+        console.error("Critical failure during asset acquisition:", err);
+        if(canvasContainer) canvasContainer.innerHTML = "<h3>Error fetching geographical indexes. Please reload.</h3>";
     });
 }
 
 function drawCurrentOutline() {
     if (currentCountryIndex >= worldCountriesData.length) {
-        document.getElementById('outline-canvas-container').innerHTML = "<h2>Incredible! You finished all countries!</h2>";
+        document.getElementById('outline-canvas-container').innerHTML = "<h2>Session Completed! Brilliant work!</h2>";
         return;
     }
 
     const country = worldCountriesData[currentCountryIndex];
     const svg = d3.select("#outline-svg");
-    svg.selectAll("*").remove(); // Wipe canvas clean from last round
+    svg.selectAll("*").remove(); // Purge old vector drawings from prior turns
 
     const width = 400;
     const height = 400;
 
-    // Center and auto-zoom tightly onto the current country's boundaries
+    // Isolate map vectors and center coordinates inside the visual projection box
     const projection = d3.geoMercator().fitSize([width, height], country.geometry);
     const pathGenerator = d3.geoPath().projection(projection);
 
     svg.append("path")
         .datum(country.geometry)
         .attr("d", pathGenerator)
-        .attr("fill", "#2c3e50") // Dark fill color for the mystery outline
+        .attr("fill", "#2c3e50") 
         .attr("stroke", "#34495e")
         .attr("stroke-width", 1.5);
         
@@ -194,7 +196,6 @@ function checkGuess() {
     const guess = input.value.trim().toLowerCase();
     const correctName = worldCountriesData[currentCountryIndex].name.toLowerCase();
 
-    // Flexible checking logic (e.g., handles minor text variations if necessary)
     if (guess === correctName) {
         feedback.innerHTML = `<span style="color: #27ae60; font-weight: bold;">Correct! It's ${worldCountriesData[currentCountryIndex].name}.</span>`;
         score += 10;

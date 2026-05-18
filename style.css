@@ -2,7 +2,7 @@
 * {
     margin: 0;
     padding: 0;
-    box-box-sizing: border-box;
+    box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -58,5 +58,71 @@ body {
 
 h1 {
     margin-bottom: 1rem;
+    color: #2c3e50;
+}
+
+/* Shape Guessing Game Container Layout */
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#outline-canvas-container {
+    background: #eef2f3;
+    border: 3px solid #bdc3c7;
+    border-radius: 12px;
+    padding: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 420px;
+    min-width: 420px;
+}
+
+.controls input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid #bdc3c7;
+    border-radius: 6px;
+    width: 220px;
+    outline: none;
+}
+
+.controls button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    background-color: #3498db;
+    color: white;
+    cursor: pointer;
+    margin-left: 5px;
+    transition: background 0.2s;
+}
+
+.controls button:hover {
+    background-color: #2980b9;
+}
+
+#skip-btn {
+    background-color: #95a5a6;
+}
+#skip-btn:hover {
+    background-color: #7f8c8d;
+}
+
+#feedback-message {
+    margin-top: 15px;
+    height: 24px;
+    font-size: 1.1rem;
+}
+
+.score-board {
+    margin-top: 15px;
+    font-size: 1.1rem;
+    font-weight: bold;
     color: #2c3e50;
 }

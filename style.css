@@ -61,7 +61,7 @@ h1 {
     color: #2c3e50;
 }
 
-/* Worldle-Style Layout */
+/* Worldle-Style Framework Layout */
 .game-container {
     display: flex;
     flex-direction: column;
@@ -114,7 +114,7 @@ h1 {
     background-color: #7f8c8d;
 }
 
-/* Guess History Grid (The Worldle Clues) */
+/* Guess History Elements */
 .guesses-list {
     width: 100%;
     max-width: 450px;

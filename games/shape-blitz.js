@@ -85,8 +85,8 @@ function setupInputEngine() {
         topSuggestedMatch = null;
         if (!val) { dropdown.style.display = "none"; return; }
 
-        // Find matches that contain or begin with input characters
-        const matches = worldCountriesData.filter(c => c.name.toLowerCase().includes(val)).slice(0, 4);
+        // FIXED: Changed .includes(val) to .startsWith(val) so "United st" matches "United States"
+        const matches = worldCountriesData.filter(c => c.name.toLowerCase().startsWith(val)).slice(0, 4);
 
         if(matches.length > 0) {
             dropdown.style.display = "block";
@@ -111,7 +111,7 @@ function setupInputEngine() {
             dropdown.style.display = "none";
             let finalString = input.value.trim();
             
-            // Auto-prediction checker: If entry isn't complete but matches an available country prediction, auto-complete it!
+            // Auto-prediction checker
             const directMatch = worldCountriesData.find(c => c.name.toLowerCase() === finalString.toLowerCase());
             if (!directMatch && topSuggestedMatch) {
                 finalString = topSuggestedMatch.name;

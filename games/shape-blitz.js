@@ -6,65 +6,100 @@ let streak = 0;
 let isProcessingTransition = false;
 let topSuggestedMatch = null;
 let registryData = [];
+let activeCloseDropdownHandler = null;
+let currentFocusIndex = -1; // Tracks keyboard navigation inside autocomplete lists
+let activeSessionId = 0;   // Circuit breaker token for async operations
 
 export function initShapeBlitz() {
+    // Increment active session token to instantly drop dangling promises from past views
+    activeSessionId++;
+    const localSessionId = activeSessionId;
+
     streak = 0;
     isProcessingTransition = false;
     topSuggestedMatch = null;
+    currentCountry = null;
+    currentFocusIndex = -1;
     
     const container = document.getElementById('outline-canvas-container');
-    if(container) container.innerHTML = "<h3>Syncing UN Outlines...</h3>";
+    if (!container) return;
+    
+    container.innerHTML = `
+        <div class="game-container">
+            <div class="hud-score-board">Streak: <span id="hud-streak">0</span></div>
+            <div id="canvas-viewframe" style="width:320px; height:240px; background:#0f172a; position:relative; display:flex; align-items:center; justify-content:center;">
+                <h3>Syncing UN Outlines...</h3>
+            </div>
+            <div id="feedback-message"></div>
+            <div class="controls-wrapper" style="position: relative;">
+                <input type="text" id="guess-input" placeholder="Type country name..." autocomplete="off" disabled />
+                <div id="search-suggestions" class="autocomplete-dropdown" style="display: none; position: absolute; left: 0; right: 0; z-index: 10;"></div>
+            </div>
+        </div>
+    `;
 
-    // 1. Fetch our separate clean registry data file first
     fetch('./data/countries.json')
         .then(res => res.json())
         .then(countriesList => {
+            if (localSessionId !== activeSessionId) return; // Halt stale execution paths
             registryData = countriesList;
-            
-            // 2. Fetch the topological coordinates map lines from the public CDN
             return d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json");
         })
         .then(topoData => {
+            if (!topoData || localSessionId !== activeSessionId) return;
+
             const features = topojson.feature(topoData, topoData.objects.countries).features;
             
-            // Map coordinate shapes to our custom clean JSON list
             worldCountriesData = features
                 .map(f => {
-                    // Force both IDs to be matching 3-digit strings (e.g. "4" becomes "004")
                     const cleanMapId = String(f.id).padStart(3, '0');
                     const match = registryData.find(item => String(item.id).padStart(3, '0') === cleanMapId);
-                    
                     return { name: match ? match.name : "Unknown", geometry: f.geometry, isCustom: !!match };
                 })
                 .filter(c => c.name !== "Unknown" && c.isCustom);
 
-            // Double check if any matches succeeded
+            const viewframe = document.getElementById('canvas-viewframe');
             if (worldCountriesData.length === 0) {
-                console.error("Data tracking warning: Zero country outlines matched your countries.json IDs.");
-                if(container) container.innerHTML = "<h3>Data ID Mismatch Error</h3>";
+                console.error("Data tracking error: Zero country outlines successfully parsed matching registry IDs.");
+                if (viewframe) viewframe.innerHTML = "<h3>Data ID Mismatch Error</h3>";
                 return;
             }
 
-            if(container) container.innerHTML = '<svg id="outline-svg" width="320" height="240"></svg>';
-            cycleNextPuzzle();
-            setupInputEngine();
+            if (viewframe) viewframe.innerHTML = '<svg id="outline-svg" width="320" height="240"></svg>';
+            
+            const inputElement = setupInputEngine();
+            cycleNextPuzzle(inputElement);
         })
         .catch(err => {
+            if (localSessionId !== activeSessionId) return;
             console.error(err);
-            if(container) container.innerHTML = "<h3>Error loading map assets.</h3>";
+            const viewframe = document.getElementById('canvas-viewframe');
+            if (viewframe) viewframe.innerHTML = "<h3>Error loading map assets.</h3>";
         });
 }
 
-function cycleNextPuzzle() {
+function cycleNextPuzzle(activeInput) {
     isProcessingTransition = false;
     topSuggestedMatch = null;
+    currentFocusIndex = -1;
+    
+    if (worldCountriesData.length === 0) return;
     currentCountry = worldCountriesData[Math.floor(Math.random() * worldCountriesData.length)];
     
-    const container = document.getElementById('outline-canvas-container');
-    if (container) container.className = "";
+    const viewframe = document.getElementById('canvas-viewframe');
+    if (viewframe) viewframe.className = "";
 
-    const input = document.getElementById('guess-input');
-    if (input) { input.value = ""; input.disabled = false; input.focus(); }
+    if (activeInput) { 
+        activeInput.value = ""; 
+        activeInput.disabled = false; 
+        activeInput.focus(); 
+    }
+
+    const dropdown = document.getElementById('search-suggestions');
+    if (dropdown) {
+        dropdown.innerHTML = "";
+        dropdown.style.display = "none";
+    }
 
     drawOutline();
 }
@@ -74,7 +109,6 @@ function drawOutline() {
     const svg = d3.select("#outline-svg");
     svg.selectAll("*").remove();
 
-    // Use geoMercator and dynamically fit the specific geometry to our exact bounding box dimensions
     const projection = d3.geoMercator().fitSize([320, 240], currentCountry.geometry);
     const pathGenerator = d3.geoPath().projection(projection);
 
@@ -87,83 +121,130 @@ function drawOutline() {
 function setupInputEngine() {
     const input = document.getElementById('guess-input');
     const dropdown = document.getElementById('search-suggestions');
-    if(!input || !dropdown) return;
-
-    // Clear old event listeners to prevent memory leaks if pages switch
-    const newInput = input.cloneNode(true);
-    input.parentNode.replaceChild(newInput, input);
+    if(!input || !dropdown) return null;
     
-    newInput.addEventListener('input', () => {
+    input.addEventListener('input', () => {
         if (isProcessingTransition) return;
-        const val = newInput.value.trim().toLowerCase();
+        const val = input.value.trim().toLowerCase();
         dropdown.innerHTML = "";
         topSuggestedMatch = null;
+        currentFocusIndex = -1;
+        
         if (!val) { dropdown.style.display = "none"; return; }
 
-        // Filter countries that START WITH the string so "United st" perfectly hits "United States"
         const matches = worldCountriesData.filter(c => c.name.toLowerCase().startsWith(val)).slice(0, 4);
 
         if(matches.length > 0) {
             dropdown.style.display = "block";
-            topSuggestedMatch = matches[0]; // Set the auto-prediction target
+            topSuggestedMatch = matches[0];
             
             matches.forEach((match, idx) => {
                 const item = document.createElement('div');
                 item.className = idx === 0 ? "autocomplete-item selected-top" : "autocomplete-item";
                 item.innerText = match.name;
-                item.addEventListener('click', () => {
-                    newInput.value = match.name;
+                
+                item.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    input.value = match.name;
                     dropdown.style.display = "none";
-                    processSubmission(match.name);
+                    processSubmission(match.name, input);
                 });
                 dropdown.appendChild(item);
             });
         } else { dropdown.style.display = "none"; }
     });
 
-    newInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
+    input.addEventListener('keydown', (e) => {
+        if (isProcessingTransition) return;
+        const items = dropdown.getElementsByTagName('div');
+
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (items.length === 0) return;
+            currentFocusIndex++;
+            if (currentFocusIndex >= items.length) currentFocusIndex = 0;
+            setActiveItem(items);
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (items.length === 0) return;
+            currentFocusIndex--;
+            if (currentFocusIndex < 0) currentFocusIndex = items.length - 1;
+            setActiveItem(items);
+        } else if (e.key === 'Escape') {
             dropdown.style.display = "none";
-            let finalString = newInput.value.trim();
+            currentFocusIndex = -1;
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            dropdown.style.display = "none";
             
-            // Auto-prediction checker: If entry isn't complete but matches an available country prediction, auto-complete it!
-            const directMatch = worldCountriesData.find(c => c.name.toLowerCase() === finalString.toLowerCase());
-            if (!directMatch && topSuggestedMatch) {
-                finalString = topSuggestedMatch.name;
-                newInput.value = finalString;
+            let finalString = input.value.trim();
+
+            // If navigating elements via arrows, select the highlighted item
+            if (currentFocusIndex > -1 && items[currentFocusIndex]) {
+                finalString = items[currentFocusIndex].innerText;
+                input.value = finalString;
+            } else {
+                const directMatch = worldCountriesData.find(c => c.name.toLowerCase() === finalString.toLowerCase());
+                if (!directMatch && topSuggestedMatch) {
+                    finalString = topSuggestedMatch.name;
+                    input.value = finalString;
+                }
             }
-            processSubmission(finalString);
+            processSubmission(finalString, input);
         }
     });
+
+    if (activeCloseDropdownHandler) {
+        document.removeEventListener('click', activeCloseDropdownHandler);
+    }
+
+    activeCloseDropdownHandler = (e) => {
+        if (e.target !== input && e.target !== dropdown) {
+            dropdown.style.display = "none";
+            currentFocusIndex = -1;
+        }
+    };
+    document.addEventListener('click', activeCloseDropdownHandler);
+
+    return input;
 }
 
-function processSubmission(guessString) {
+function setActiveItem(items) {
+    if (!items) return;
+    // Strip manual and structural focus pseudo-classes
+    for (let i = 0; i < items.length; i++) {
+        items[i].classList.remove("selected-top");
+        items[i].classList.remove("autocomplete-active");
+    }
+    if (currentFocusIndex > -1 && items[currentFocusIndex]) {
+        items[currentFocusIndex].classList.add("autocomplete-active");
+    }
+}
+
+function processSubmission(guessString, activeInput) {
     if (isProcessingTransition || !currentCountry) return;
     
-    const input = document.getElementById('guess-input');
     const feedback = document.getElementById('feedback-message');
-    const container = document.getElementById('outline-canvas-container');
+    const viewframe = document.getElementById('canvas-viewframe');
 
     isProcessingTransition = true;
-    if (input) input.disabled = true;
+    if (activeInput) activeInput.disabled = true;
 
-    // Direct Evaluation
     if (guessString.toLowerCase() === currentCountry.name.toLowerCase()) {
         streak += 1;
-        if(container) container.className = "flash-correct";
+        if(viewframe) viewframe.className = "flash-correct";
         if(feedback) feedback.innerHTML = `<span style="color:#10b981; font-weight:bold;">CORRECT! 🎉</span>`;
     } else {
-        streak = 0; // Break Streak instantly
-        if(container) container.className = "flash-wrong";
+        streak = 0; 
+        if(viewframe) viewframe.className = "flash-wrong";
         if(feedback) feedback.innerHTML = `<span style="color:#ef4444; font-weight:bold;">WRONG! It was ${currentCountry.name}</span>`;
     }
 
     const streakEl = document.getElementById('hud-streak');
     if (streakEl) streakEl.innerText = streak;
 
-    // 1.2 Second pacing loop transition duration
     setTimeout(() => {
         if(feedback) feedback.innerHTML = "";
-        cycleNextPuzzle();
+        cycleNextPuzzle(activeInput);
     }, 1200);
 }

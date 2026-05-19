@@ -1,0 +1,22 @@
+[
+  { "name": "Afghanistan", "id": "004" },
+  { "name": "Albania", "id": "008" },
+  { "name": "Algeria", "id": "012" },
+  { "name": "Argentina", "id": "032" },
+  { "name": "Australia", "id": "036" },
+  { "name": "Austria", "id": "040" },
+  { "name": "Brazil", "id": "076" },
+  { "name": "Canada", "id": "124" },
+  { "name": "China", "id": "156" },
+  { "name": "Egypt", "id": "818" },
+  { "name": "France", "id": "250" },
+  { "name": "Germany", "id": "276" },
+  { "name": "India", "id": "356" },
+  { "name": "Italy", "id": "380" },
+  { "name": "Japan", "id": "392" },
+  { "name": "Mexico", "id": "484" },
+  { "name": "South Africa", "id": "710" },
+  { "name": "Spain", "id": "724" },
+  { "name": "United Kingdom", "id": "826" },
+  { "name": "United States", "id": "840" }
+]

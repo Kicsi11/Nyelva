@@ -73,38 +73,48 @@ h1 {
     margin-top: 15px;
 }
 
-/* High-Quality Glow Border Map Arena viewport */
+/* High-Quality Premium Map Arena Viewport */
 #outline-canvas-container {
-    background: #0f172a;
+    background: #0b0f19;
     border: 3px solid #38bdf8; /* Vibrant cyan neon indicator frame */
-    box-shadow: 0 0 15px rgba(56, 189, 248, 0.25); /* Fluid outer ambient outline glow */
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.15); /* Fluid outer ambient outline glow */
     border-radius: 16px;
-    padding: 15px;
+    padding: 20px;
     margin-bottom: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 260px;
-    width: 340px;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    height: 280px;
+    width: 360px;
+    transition: border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Dynamic State Boundary Flashes */
 #outline-canvas-container.flash-correct {
     border-color: #10b981;
-    box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+    box-shadow: 0 0 25px rgba(16, 185, 129, 0.45);
 }
 
 #outline-canvas-container.flash-wrong {
     border-color: #ef4444;
-    box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+    box-shadow: 0 0 25px rgba(239, 68, 68, 0.45);
+}
+
+/* High Definition SVG Geometry Styling */
+.country-path {
+    fill: #f8fafc;
+    stroke: #ffffff;
+    stroke-width: 1.25px;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.5));
 }
 
 /* Input Container Wrapper Matrix */
 .controls-wrapper {
     position: relative;
     width: 100%;
-    max-width: 340px;
+    max-width: 360px;
     margin-bottom: 15px;
 }
 
@@ -152,7 +162,7 @@ h1 {
     border-bottom: 1px solid #334155;
 }
 
-.autocomplete-item:hover {
+.autocomplete-item:hover, .autocomplete-item.selected-top {
     background-color: #334155;
     color: #38bdf8;
 }

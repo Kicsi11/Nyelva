@@ -30,10 +30,20 @@ export function initShapeBlitz() {
             // Map coordinate shapes to our custom clean JSON list
             worldCountriesData = features
                 .map(f => {
-                    const match = registryData.find(item => item.id === f.id);
+                    // Force both IDs to be matching 3-digit strings (e.g. "4" becomes "004")
+                    const cleanMapId = String(f.id).padStart(3, '0');
+                    const match = registryData.find(item => String(item.id).padStart(3, '0') === cleanMapId);
+                    
                     return { name: match ? match.name : "Unknown", geometry: f.geometry, isCustom: !!match };
                 })
                 .filter(c => c.name !== "Unknown" && c.isCustom);
+
+            // Double check if any matches succeeded
+            if (worldCountriesData.length === 0) {
+                console.error("Data tracking warning: Zero country outlines matched your countries.json IDs.");
+                if(container) container.innerHTML = "<h3>Data ID Mismatch Error</h3>";
+                return;
+            }
 
             if(container) container.innerHTML = '<svg id="outline-svg" width="320" height="240"></svg>';
             cycleNextPuzzle();
@@ -64,6 +74,7 @@ function drawOutline() {
     const svg = d3.select("#outline-svg");
     svg.selectAll("*").remove();
 
+    // Use geoMercator and dynamically fit the specific geometry to our exact bounding box dimensions
     const projection = d3.geoMercator().fitSize([320, 240], currentCountry.geometry);
     const pathGenerator = d3.geoPath().projection(projection);
 
@@ -78,14 +89,18 @@ function setupInputEngine() {
     const dropdown = document.getElementById('search-suggestions');
     if(!input || !dropdown) return;
 
-    input.addEventListener('input', () => {
+    // Clear old event listeners to prevent memory leaks if pages switch
+    const newInput = input.cloneNode(true);
+    input.parentNode.replaceChild(newInput, input);
+    
+    newInput.addEventListener('input', () => {
         if (isProcessingTransition) return;
-        const val = input.value.trim().toLowerCase();
+        const val = newInput.value.trim().toLowerCase();
         dropdown.innerHTML = "";
         topSuggestedMatch = null;
         if (!val) { dropdown.style.display = "none"; return; }
 
-        // FIXED: Changed .includes(val) to .startsWith(val) so "United st" matches "United States"
+        // Filter countries that START WITH the string so "United st" perfectly hits "United States"
         const matches = worldCountriesData.filter(c => c.name.toLowerCase().startsWith(val)).slice(0, 4);
 
         if(matches.length > 0) {
@@ -97,7 +112,7 @@ function setupInputEngine() {
                 item.className = idx === 0 ? "autocomplete-item selected-top" : "autocomplete-item";
                 item.innerText = match.name;
                 item.addEventListener('click', () => {
-                    input.value = match.name;
+                    newInput.value = match.name;
                     dropdown.style.display = "none";
                     processSubmission(match.name);
                 });
@@ -106,16 +121,16 @@ function setupInputEngine() {
         } else { dropdown.style.display = "none"; }
     });
 
-    input.addEventListener('keydown', (e) => {
+    newInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
             dropdown.style.display = "none";
-            let finalString = input.value.trim();
+            let finalString = newInput.value.trim();
             
-            // Auto-prediction checker
+            // Auto-prediction checker: If entry isn't complete but matches an available country prediction, auto-complete it!
             const directMatch = worldCountriesData.find(c => c.name.toLowerCase() === finalString.toLowerCase());
             if (!directMatch && topSuggestedMatch) {
                 finalString = topSuggestedMatch.name;
-                input.value = finalString;
+                newInput.value = finalString;
             }
             processSubmission(finalString);
         }
@@ -130,7 +145,7 @@ function processSubmission(guessString) {
     const container = document.getElementById('outline-canvas-container');
 
     isProcessingTransition = true;
-    input.disabled = true;
+    if (input) input.disabled = true;
 
     // Direct Evaluation
     if (guessString.toLowerCase() === currentCountry.name.toLowerCase()) {
@@ -146,7 +161,7 @@ function processSubmission(guessString) {
     const streakEl = document.getElementById('hud-streak');
     if (streakEl) streakEl.innerText = streak;
 
-    // Instant pacing loop transition duration
+    // 1.2 Second pacing loop transition duration
     setTimeout(() => {
         if(feedback) feedback.innerHTML = "";
         cycleNextPuzzle();

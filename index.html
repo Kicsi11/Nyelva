@@ -5,15 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Project Hub</title>
     <style>
+        /* Flexbox setup to make sure the footer stays at the bottom */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f7f6;
             color: #333;
-            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .main-content {
             padding: 40px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            flex: 1; /* Pushes the footer down */
         }
         h1 { color: #2c3e50; margin-bottom: 10px; }
         .subtitle { color: #7f8c8d; margin-bottom: 40px; font-size: 1.1rem; }
@@ -59,40 +69,81 @@
             transition: background 0.2s;
         }
         .play-button:hover { background: #2980b9; }
+
+        /* --- GOOGLE ADSENSE REQUIRED FOOTER STYLES --- */
+        footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+        .footer-links {
+            margin-bottom: 10px;
+        }
+        .footer-links a {
+            color: #3498db;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        footer p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: #bdc3c7;
+        }
     </style>
 </head>
 <body>
 
-    <h1>Welcome to My Project Hub</h1>
-    <p class="subtitle">Explore my games, interactive trees, and maps all in one place!</p>
+    <div class="main-content">
+        <h1>Welcome to My Project Hub</h1>
+        <p class="subtitle">Explore my games, interactive trees, and maps all in one place!</p>
 
-    <div class="hub-grid">
+        <div class="hub-grid">
 
-        <div class="project-card">
-            <div>
-                <h3>Interactive Map</h3>
-                <p>An interactive, clickable map showcasing data and geographic locations.</p>
+            <div class="project-card">
+                <div>
+                    <h3>Interactive Map</h3>
+                    <p>An interactive, clickable map showcasing data and geographic locations.</p>
+                </div>
+                <a class="play-button" href="./interactive-map/index.html">Open Map</a>
             </div>
-            <a class="play-button" href="./interactive-map/index.html">Open Map</a>
-        </div>
 
-        <div class="project-card">
-            <div>
-                <h3>Language Game</h3>
-                <p>Test your language skills and beat the high score in this interactive game.</p>
+            <div class="project-card">
+                <div>
+                    <h3>Language Game</h3>
+                    <p>Test your language skills and beat the high score in this interactive game.</p>
+                </div>
+                <a class="play-button" href="./language-game/index.html">Play Game</a>
             </div>
-            <a class="play-button" href="./language-game/index.html">Play Game</a>
-        </div>
 
-        <div class="project-card">
-            <div>
-                <h3>Language Tree</h3>
-                <p>Explore the history and fascinating evolution of world languages visually.</p>
+            <div class="project-card">
+                <div>
+                    <h3>Language Tree</h3>
+                    <p>Explore the history and fascinating evolution of world languages visually.</p>
+                </div>
+                <a class="play-button" href="./language-tree/index.html">Explore Tree</a>
             </div>
-            <a class="play-button" href="./language-tree/index.html">Explore Tree</a>
-        </div>
 
         </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="./about.html">About Me</a>
+            <a href="./privacy-policy.html">Privacy Policy</a>
+            <a href="./terms.html">Terms of Service</a>
+            <a href="./contact.html">Contact Us</a>
+        </div>
+        <p>&copy; 2026 My Project Hub. All Rights Reserved.</p>
+    </footer>
 
 </body>
 </html>

@@ -2,18 +2,17 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebas
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { getFirestore, doc, setDoc, getDoc, collection, query, orderBy, limit, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-// --- YOUR LIVE FIREBASE CONFIGURATION ---
+// --- CORE FIREBASE APPLICATION CONFIGURATION ---
 const firebaseConfig = {
     apiKey: "AIzaSyAy15aCrA51xFfgK5U01xX9Ed79UzdOysA",
     authDomain: "nyelva.firebaseapp.com",
-    databaseURL: "https://nyelva-default-rtdb.firebaseio.com",
     projectId: "nyelva",
     storageBucket: "nyelva.firebasestorage.app",
     messagingSenderId: "972474970074",
     appId: "1:972474970074:web:60b86aef05258059a05ae3"
 };
 
-// Initialize Firebase Core Instances
+// Initialize Firebase Core & Firestore Framework Connections
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -21,7 +20,7 @@ const db = getFirestore(app);
 let currentUserProfile = null;
 
 // --- CUSTOM GEOGRAPHY DATA MATRIX ---
-// Customize or swap this array completely to use your own shapes and names.
+// Expand or swap items within this registry matrix to alter game puzzles.
 const customBlitzDataRegistry = [
     { name: "United States", id: "840" },
     { name: "Canada", id: "124" },
@@ -292,10 +291,14 @@ function drawOutline() {
     const svg = d3.select("#outline-svg");
     svg.selectAll("*").remove();
 
+    // Balanced bounding box metric calculation to auto-center large and small features perfectly
     const projection = d3.geoMercator().fitSize([320, 240], currentCountry.geometry);
     const pathGenerator = d3.geoPath().projection(projection);
 
-    svg.append("path").datum(currentCountry.geometry).attr("d", pathGenerator).attr("class", "country-path");
+    svg.append("path")
+        .datum(currentCountry.geometry)
+        .attr("d", pathGenerator)
+        .attr("class", "country-path");
 }
 
 function setupAutocompleteInput() {

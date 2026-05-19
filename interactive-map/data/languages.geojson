@@ -1,0 +1,772 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+ {
+      "type": "Feature",
+      "properties": {
+        "language": "Basque (euskara)",
+        "family": "Isolate language",
+        "kind": "point",
+        "description": "Ancestry: Isolate language<br>L1 Speakers: ~760k<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-2.472694, 42.947778]
+      }
+    },   
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Rusyn (русиньскый язык)",
+        "family": "Slavic language",
+        "kind": "point",
+        "description": "Ancestry: East Slavic, Slavic language<br>L1 Speakers: ~70k<br>Script: : Cyrillic"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [22.187206, 49.065949]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Slovak (Slovenský)",
+        "family": "Slavic language",
+        "kind": "point",
+        "description": "Ancestry: West Slavic, Slavic language<br>L1 Speakers: ~5 Million<br>Script: : Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.282193, 48.631457]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "TshiVenda (Tshivenḓa)",
+        "family": "Niger-Congo language",
+        "kind": "point",
+        "description": "Ancestry: Bantu, Niger-Congo language<br>L1 Speakers: ~1.3 Million<br>Script: : Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [31.000273, -22.589415]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Tsonga (Xitsonga)",
+        "family": "Niger-Congo language",
+        "kind": "point",
+        "description": "Ancestry: Bantu, Niger-Congo language<br>L1 Speakers: ~3.7 Million<br>Script: : Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [31.524767, -24.052233]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Tswana (Setswana)",
+        "family": "Niger-Congo language",
+        "kind": "point",
+        "description": "Ancestry: Bantu, Niger-Congo language<br>L1 Speakers: ~5.2 Million<br>Script: : Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [25.607950, -25.921491]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Northern Sotho (Sepedi)",
+        "family": "Niger-Congo language",
+        "kind": "point",
+        "description": "Ancestry: Bantu, Niger-Congo language<br>L1 Speakers: ~6.2 Million<br>Script: : Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [30.118195, -24.603573]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Southern Sotho (Sesotho)",
+        "family": "Niger-Congo language",
+        "kind": "point",
+        "description": "Ancestry: Bantu, Niger-Congo language<br>L1 Speakers: ~6 Million<br>Script: : Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [27.815396, -29.212590]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Phuthi (Síphùthì)",
+        "family": "Niger-Congo language",
+        "kind": "point",
+        "description": "Ancestry: Nguni, Niger-Congo language<br>L1 Speakers: ~20k<br>Script: : Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [28.060535, -30.549607]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Swazi (siSwati)",
+        "family": "Niger-Congo language",
+        "kind": "point",
+        "description": "Ancestry: Nguni, Niger-Congo language<br>L1 Speakers: ~2.3 Million<br>Script: : Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [31.563474, -26.527476]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Southern Ndebele (isiNdebele seSewula)",
+        "family": "Niger-Congo language",
+        "kind": "point",
+        "description": "Ancestry: Nguni, Niger-Congo language<br>L1 Speakers: ~1.1 Million<br>Script: : Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [28.812553, -25.453193]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Northern Ndebele (isiNdebele saseNyakatho)",
+        "family": "Niger-Congo language",
+        "kind": "point",
+        "description": "Ancestry: Nguni, Niger-Congo language<br>L1 Speakers: ~2.4 Million<br>Script: : Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [28.303299, -20.216842]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Xhosa (isiXhosa)",
+        "family": "Niger-Congo language",
+        "kind": "point",
+        "description": "Ancestry: Nguni, Niger-Congo language<br>L1 Speakers: ~2.6 Million<br>Script: : Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [27.156754, -32.122593]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Zulu (isiZulu)",
+        "family": "Niger-Congo language",
+        "kind": "point",
+        "description": "Ancestry: Nguni, Niger-Congo language<br>L1 Speakers: ~13 Million<br>Script: : Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [30.869918, -28.837937]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Dzongkha (ትግርኛ)",
+        "family": "Sino-Tibetan language",
+        "kind": "point",
+        "description": "Ancestry: Tibetic, Sino-Tibetan language<br>L1 Speakers: ~171k<br>Script: Tibetan"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [89.882713, 27.386645]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Tigrinya (ትግርኛ)",
+        "family": "Semitic language",
+        "kind": "point",
+        "description": "Ancestry: Ethiopic, Semitic language<br>L1 Speakers: ~9.9 Million<br>Script: Ge'ez"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [38.923397, 13.552016]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Itelmen (итэнмэн)",
+        "family": "Chukotko-Kamchatkan language",
+        "kind": "point",
+        "description": "Ancestry: Kamchatkan, Chukotko-Kamchatkan language<br>L1 Speakers: ~800<br>Script: Cyrillic"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [157.476551, 56.186534]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Mohawk (Kanienʼkéha)",
+        "family": "Iroquoian language",
+        "kind": "point",
+        "description": "Ancestry: Iroquoian language<br>L1 Speakers: ~3.8k<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-74.314296, 44.836980]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Afrikaans",
+        "family": "Germanic language",
+        "kind": "point",
+        "description": "Ancestry: West Germanic, Germanic language<br>L1 Speakers: ~7.2 Million<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.354375, -31.645900]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Low German (Plattdütsch)",
+        "family": "Germanic language",
+        "kind": "point",
+        "description": "Ancestry: West Germanic, Germanic language<br>L1 Speakers: ~6.7 Million<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.918174, 53.068287]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Mongolian (Монгол)",
+        "family": "Mongolic language",
+        "kind": "point",
+        "description": "Ancestry: Central Mongolic, Mongolic language<br>L1 Speakers: ~5.4 Million<br>Script: Cyrillic"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [103.935403, 47.059645]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Buryat (Буряад)",
+        "family": "Mongolic language",
+        "kind": "point",
+        "description": "Ancestry: Central Mongolic, Mongolic language<br>L1 Speakers: ~290k<br>Script: Cyrillic"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [105.817018, 51.208948]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Persian/Farsi (فارسی)",
+        "family": "Iranian language",
+        "kind": "point",
+        "description": "Ancestry: Western Iranian, Iranian language<br>L1 Speakers: ~91 Million<br>Script: Arabic"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [55.884017, 32.755866]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Hindi (हिन्दी)",
+        "family": "Indo-Aryan language",
+        "kind": "point",
+        "description": "Ancestry: Central Aryan, Indo-Aryan language<br>L1 Speakers: ~345 Million<br>Script: Devanagari"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [77.864874, 25.934335]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Urdu (اردو)",
+        "family": "Indo-Aryan language",
+        "kind": "point",
+        "description": "Ancestry: Central Aryan, Indo-Aryan language<br>L1 Speakers: ~78 Million<br>Script: Arabic"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [67.052895, 24.873978]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Kurdish (Kurdî/کوردی)",
+        "family": "Iranian language",
+        "kind": "point",
+        "description": "Ancestry: Western Iranian, Iranian language<br>L1 Speakers: ~29 Million<br>Script: Cyrillic/Arabic"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.266522, 37.443681]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Kyrgyz (Кыргыз)",
+        "family": "Turkic language",
+        "kind": "point",
+        "description": "Ancestry: Kipchak, Turkic language<br>L1 Speakers: ~5 Million<br>Script: Cyrillic"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [74.512400, 41.166249]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Kazakh (қазақ)",
+        "family": "Turkic language",
+        "kind": "point",
+        "description": "Ancestry: Kipchak, Turkic language<br>L1 Speakers: ~16.5 Million<br>Script: Cyrillic"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [67.793526, 47.901613]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Croatian (hrvatski)",
+        "family": "Slavic language",
+        "kind": "point",
+        "description": "Ancestry: South Slavic, Slavic language<br>L1 Speakers: ~5.1 Million<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [16.459798, 45.599819]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Papiamento",
+        "family": "Creole",
+        "kind": "point",
+        "description": "Ancestry: Portuguese-based Creole language<br>L1 Speakers: ~350k<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-68.985, 12.270]
+      }
+    },     
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Yakut (саха)",
+        "family": "Turkic language",
+        "kind": "point",
+        "description": "Ancestry: Siberian Turkic, Turkic language<br>L1 Speakers: ~450k<br>Script: Cyrillic"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [133.663673, 67.471555]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "West Frisian (Frysk)",
+        "family": "Germanic language",
+        "kind": "point",
+        "description": "Ancestry: Anglo-Frisian, Germanic language<br>L1 Speakers: ~470k<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.814052, 53.134164]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "North Frisian (Frasch, Freesk, Friesk or Friisk)",
+        "family": "Germanic language",
+        "kind": "point",
+        "description": "Ancestry: Anglo-Frisian, Germanic language<br>L1 Speakers: ~10k<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [8.842137, 54.605284]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Saterland/East Frisian (Fräisk)",
+        "family": "Germanic language",
+        "kind": "point",
+        "description": "Ancestry: Anglo-Frisian, Germanic language<br>L1 Speakers: ~2k<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.737142, 53.043504]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Kashubian (kaszëbsczi)",
+        "family": "Slavic language",
+        "kind": "point",
+        "description": "Ancestry: Lechitic, Slavic language<br>L1 Speakers: ~87k<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.200513, 54.331485]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Russian (русский)",
+        "family": "Slavic language",
+        "kind": "point",
+        "description": "Ancestry: East Slavic, Slavic language<br>L1 Speakers: ~145 Million<br>Script: Cyrillic"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [37.609983, 55.720613]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Catalan (català)",
+        "family": "Romance language",
+        "kind": "point",
+        "description": "Ancestry: Gallo-Romance, Romance language<br>L1 Speakers: ~4.1 Million<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [1.355638, 41.525852]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Norwegian (norsk)",
+        "family": "Germanic language",
+        "kind": "point",
+        "description": "Ancestry: Nordic, Germanic language<br>L1 Speakers: ~4.5 Million<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [8.698342, 59.862470]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Swedish (svenska)",
+        "family": "Germanic language",
+        "kind": "point",
+        "description": "Ancestry: Nordic, Germanic language<br>L1 Speakers: ~10 Million<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [15.2422542, 59.419374]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Danish (dansk)",
+        "family": "Germanic language",
+        "kind": "point",
+        "description": "Ancestry: Nordic, Germanic language<br>L1 Speakers: ~5.7 Million<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.341542, 55.555360]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Nahuatl (depends on dialect)",
+        "family": "Uto-Aztecan language",
+        "kind": "point",
+        "description": "Ancestry: Southern Uto-Aztecan, Uto-Aztecan language<br>L1 Speakers: ~1.7 Million<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-98.055754, 19.100534]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Igbo (Ígbò)",
+        "family": "Niger-Congo language",
+        "kind": "point",
+        "description": "Ancestry: Volta-Niger, Niger-Congo language<br>L1 Speakers: ~34 Million<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [8.165627, 5.139091]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Cherokee (ᏣᎳᎩ)",
+        "family": "Iroquoian language",
+        "kind": "point",
+        "description": "Ancestry: Iroquoian language<br>L1 Speakers: ~2k<br>Script: Cherokee syllabary"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-94.998142, 36.184442]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Navajo (Diné bizaad)",
+        "family": "Na-Dené language",
+        "kind": "point",
+        "description": "Ancestry: Southern Athabaskan, Na-Dené language<br>L1 Speakers: ~170k<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-109.343138, 36.652557]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Bashkir (башҡортса)",
+        "family": "Turkic language",
+        "kind": "point",
+        "description": "Ancestry: Kipchak, Turkic language<br>L1 Speakers: ~1.5 Million<br>Script: Cyrillic"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [56.758460, 53.891392]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Purépecha (Pʼurhépecha)",
+        "family": "Isolate language",
+        "kind": "point",
+        "description": "Ancestry: Isolate language<br>L1 Speakers: ~140k<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-101.872833, 19.770322]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Karelian (Karjala)",
+        "family": "Uralic language",
+        "kind": "point",
+        "description": "Ancestry: Finnic, Uralic language<br>L1 Speakers: ~20k-35k<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [33.0, 62.5]
+      }
+    },
+ {
+      "type": "Feature",
+      "properties": {
+        "language": "Breton (Brezhoneg)",
+        "family": "Celtic language",
+        "kind": "point",
+        "description": "Ancestry: Brittonic, Celtic language<br>L1 Speakers: ~150k<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-2.720016,48.118251]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Sicilian (Sicilianu)",
+        "family": "Romance language",
+        "kind": "point",
+        "description": "Ancestry: Italo-Dalmatian, Romance language<br>L1 Speakers: ~5 Million<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [14.275822, 37.486846]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Turkish (Türkçe)",
+        "family": "Turkic language",
+        "kind": "point",
+        "description": "Ancestry: Oghuz, Turkic language<br>L1 Speakers: ~85 Million<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [35.0, 39.0]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Hungarian (Magyar)",
+        "family": "Uralic language",
+        "kind": "point",
+        "description": "Ancestry: Ugric, Uralic language<br>L1 Speakers: ~14 Million<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [19.213575, 47.330260]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Welsh (Cymru)",
+        "family": "Celtic language",
+        "kind": "point",
+        "description": "Ancestry: Brittonic, Celtic language<br>L1 Speakers: ~538k<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-3.581379, 52.262106]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Scottish Gaelic (Gàidhlig)",
+        "family": "Celtic language",
+        "kind": "point",
+        "description": "Ancestry: Goidelic, Celtic language<br>L1 Speakers: ~60k<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-4.3, 56.6]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Irish Gaelic (Gaeilge)",
+        "family": "Celtic language",
+        "kind": "point",
+        "description": "Ancestry: Goidelic, Celtic language<br>L1 Speakers: ~75k<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-7.7, 53.0]
+      }
+    },
+  {
+      "type": "Feature",
+      "properties": {
+        "language": "Cornish (Kernewek)",
+        "family": "Celtic language",
+        "kind": "point",
+        "description": "Ancestry: Brittonic, Celtic language<br>L1 Speakers: ~400<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-4.139380, 50.586376]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "Ainu (アイヌ)",
+        "family": "Isolate",
+        "kind": "point",
+        "description": "Ancestry: Isolate language<br>L1 Speakers: ~0<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [142.326879, 42.654162]
+      }
+    },
+{
+      "type": "Feature",
+      "properties": {
+        "language": "English",
+        "family": "Germanic",
+        "kind": "point",
+        "description": "Ancestry: Anglo-Frisian, Germanic language<br>L1 Speakers: ~375 Million<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-0.8, 52.0]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "language": "Scots",
+        "family": "Germanic language",
+        "kind": "point",
+        "description": "Ancestry: Anglo-Frisian, Germanic language<br>L1 Speakers: ~1.5 Million<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-3.5, 55.5]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "language": "Manx (Gaelg)",
+        "family": "Celtic language",
+        "kind": "point",
+        "description": "Ancestry: Goidelic, Celtic language<br>L1 Speakers: ~0<br>Script: Latin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-4.548, 54.2]
+      }
+    }
+  ]
+}
